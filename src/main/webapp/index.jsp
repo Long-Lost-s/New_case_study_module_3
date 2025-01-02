@@ -5,9 +5,9 @@
     <title>JSP - Hello World</title>
 </head>
 <body>
-    <h1><%= "Hello World!" %>
-    </h1>
-    <br/>
-    <a href="/teacher">Teacher</a>
+    <%-- KHÔNG XÓA DÒNG DƯỚI NÀY, ĐỂ NGUYÊN KHI TRÌNH BÀY TRÊN MEET - AHuy --%>
+    <h1>Làm ơn bấm luôn vào link ở index đừng gõ tay trên thanh URL</h1>
+    <a href="/academicAffair">Xem và sửa điểm học viên</a><br>
+    <a href="/teacher">Thay đổi trạng thái của học viên</a><br>
 </body>
 </html>

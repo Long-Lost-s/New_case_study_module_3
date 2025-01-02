@@ -6,17 +6,17 @@
     <title>User Management Application</title>
     <style>
         #data {
-            margin: 30px auto;
+            margin: 20px auto;
             width: fit-content;
             box-shadow: 0 0 10px rgba(60, 60, 150, 0.75);
-            padding: 15px;
+            padding: 10px;
             border-radius: 10px;
         }
 
         #table {
             margin: auto;
             border-collapse: collapse;
-            font-size: 18px;
+            font-size: 15px;
         }
 
         #table td, th {
@@ -55,10 +55,11 @@
                 <h2>Danh sách học viên</h2>
                 <div id="select-class-id">
                     <p>Lớp: </p>
-                    <select name="classId">
+                    <select id="classId" name="classId" onchange="getStudentByClass()">
+                        <option value=""></option>
                         <c:forEach var="classs" items="${classesList}">
                             <option value="${classs.getClassId()}">
-                                <c:out value="${classs.getClassName()}"></c:out>
+                                <c:out value="${classs.getClassName()}"/>
                             </option>
                         </c:forEach>
                     </select>
@@ -86,5 +87,19 @@
             </c:forEach>
         </table>
     </div>
+    <script>
+        let elementSelectClass = document.getElementById("classId");
+
+        function getStudentByClass() {
+            let classId = elementSelectClass.value;
+            window.location.href = "/teacher?classId=" + classId;
+        }
+
+        function setSelectClassOption() {
+            elementSelectClass.value = "<c:out value="${classId}"/>";
+        }
+
+        setSelectClassOption();
+    </script>
 </body>
 </html>

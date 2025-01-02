@@ -3,9 +3,9 @@ package model;
 public class Classes {
     private int classId;
     private String className;
-    private String teacherId;
+    private int teacherId;
 
-    public Classes(int classId, String className, String teacherId) {
+    public Classes(int classId, String className, int teacherId) {
         this.classId = classId;
         this.className = className;
         this.teacherId = teacherId;
@@ -27,11 +27,11 @@ public class Classes {
         this.className = className;
     }
 
-    public String getTeacherId() {
+    public int getTeacherId() {
         return teacherId;
     }
 
-    public void setTeacherId(String teacherId) {
+    public void setTeacherId(int teacherId) {
         this.teacherId = teacherId;
     }
 }

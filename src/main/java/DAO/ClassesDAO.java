@@ -27,7 +27,7 @@ public class ClassesDAO implements IClassesDAO {
             while (rs.next()) {
                 int classId = rs.getInt("ClassId");
                 String className = rs.getString("ClassName");
-                String teacherId = rs.getString("TeacherId");
+                int teacherId = Integer.parseInt(rs.getString("TeacherId"));
                 Classes classs = new Classes(classId,className,teacherId);
                 classes.add(classs);
             }

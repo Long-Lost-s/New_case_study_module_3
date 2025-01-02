@@ -37,21 +37,40 @@ public class TeacherActionController extends HttpServlet {
 
         try {
             switch (action) {
+                case "edit":
+                    showEditStatusForm(request, response);
+                    break;
                 default:
                     listStudents(request, response);
+                    break;
             }
         } catch (SQLException e) {
             throw new ServletException(e);
         }
     }
 
+    private void showEditStatusForm (HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, IOException, ServletException {
+
+    }
+
     private void listStudents (HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
-        List<Student> studentList = studentDAO.selectAllStudents();
+        String classId = request.getParameter("classId");
+        if (classId == null) classId = "";
+
+        List<Student> studentList;
+        if (classId.isEmpty()) {
+            studentList = studentDAO.selectAllStudents();
+        } else {
+            studentList = studentDAO.selectStudentsByClass(Integer.parseInt(classId));
+        }
+
         List<Classes> classesList = classDAO.selectAllClasses();
 
         request.setAttribute("studentList", studentList);
         request.setAttribute("classesList", classesList);
+        request.setAttribute("classId", classId);
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("teacherAction/listStudent.jsp");
         dispatcher.forward(request, response);
