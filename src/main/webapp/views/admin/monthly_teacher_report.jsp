@@ -1,13 +1,15 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
   <title>Monthly Teacher Report</title>
-  <link rel="stylesheet" type="text/css" href="/styles/admin.css">
+  <link rel="stylesheet" type="text/css" href="/style.css">
 </head>
 <body>
 <h1>Monthly Teacher Report</h1>
 
-<p><a href="/admin/dashboard.jsp">Back to Dashboard</a></p>
+<p><a href="/views/admin/admin_dashboard.jsp">Back to Dashboard</a></p>
 
 <!-- Success or error message -->
 <c:if test="${param.success != null}">
@@ -40,10 +42,5 @@
   </c:forEach>
   </tbody>
 </table>
-
-<!-- Trigger to generate new monthly reports -->
-<form action="/admin/generateMonthlyReports" method="post">
-  <button type="submit">Generate Monthly Reports</button>
-</form>
 </body>
 </html>
