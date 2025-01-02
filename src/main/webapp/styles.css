@@ -1,0 +1,88 @@
+/* Tổng quan */
+body {
+    font-family: "Arial", sans-serif;
+    background-color: #4682B4; /* Màu xanh dương nhạt */
+    margin: 0;
+    padding: 0;
+    color: #333; /* Màu chữ mặc định */
+}
+
+h2 {
+    color: #444; /* Màu xám đậm cho tiêu đề */
+    text-align: center;
+    margin: 20px 0;
+    font-size: 26px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Hiệu ứng nổi nhẹ */
+}
+
+/* Bảng */
+table {
+    width: 90%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: #ffffff; /* Nền trắng */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Hiệu ứng nổi nhẹ */
+    border-radius: 8px; /* Góc bo tròn */
+    overflow: hidden;
+}
+
+table th, table td {
+    border: 1px solid #ddd; /* Viền màu xám nhạt */
+    padding: 12px 15px;
+    text-align: center;
+}
+
+table th {
+    background-color: #4CAF50; /* Màu xanh lá nhạt cho tiêu đề */
+    color: white;
+    font-weight: bold;
+}
+
+table tr:nth-child(even) {
+    background-color: #f9f9f9; /* Hàng xen kẽ xám nhạt */
+}
+
+table tr:hover {
+    background-color: #f1f1f1; /* Màu xám sáng hơn khi hover */
+}
+
+/* Nút bấm và liên kết */
+a {
+    display: inline-block;
+    margin: 20px auto;
+    text-decoration: none;
+    color: white;
+    background-color: #007BFF; /* Màu xanh dương */
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Hiệu ứng nổi nhẹ */
+}
+
+a:hover {
+    background-color: #0056b3; /* Xanh dương đậm hơn khi hover */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Tăng hiệu ứng nổi khi hover */
+}
+
+/* Thông báo lỗi */
+.error {
+    color: #d9534f; /* Màu đỏ nhạt */
+    text-align: center;
+    font-size: 18px;
+    margin: 20px 0;
+}
+
+/* Tiêu đề */
+header {
+    background-color: #007BFF; /* Nền xanh dương đậm */
+    padding: 15px 0;
+    text-align: center;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 0 0 10px 10px;
+}
+
