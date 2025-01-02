@@ -46,7 +46,7 @@ public class AcademicAffairsController extends HttpServlet {
     }
 
     private void showEditForm(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
+            throws ServletException, IOException {
         int subjectId = Integer.parseInt(request.getParameter("subjectId"));
         int studentId = Integer.parseInt(request.getParameter("studentId"));
 

@@ -24,10 +24,10 @@ public enum StudentStatus {
                 return SUSPENDED;
             case "Chuyển lớp":
                 return TRANSFER;
-            case "Đang học":
-                return STUDYING;
+//            case "Đang học":
+//                return STUDYING;
             default:
-                return null;
+                return STUDYING;
         }
     }
 }

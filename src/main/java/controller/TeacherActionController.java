@@ -6,6 +6,7 @@ import DAO.IStudentDAO;
 import DAO.StudentDAO;
 import model.Classes;
 import model.Student;
+import model.StudentStatus;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -20,7 +21,7 @@ import java.util.List;
 @WebServlet(name = "Teacher Action Controller", urlPatterns = "/teacher")
 public class TeacherActionController extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private IStudentDAO studentDAO;
+    private StudentDAO studentDAO;
     private IClassesDAO classDAO;
 
     @Override
@@ -51,7 +52,12 @@ public class TeacherActionController extends HttpServlet {
 
     private void showEditStatusForm (HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
+        int studentId = Integer.parseInt(request.getParameter("studentId"));
 
+        Student student = studentDAO.selectStudent(studentId);
+        request.setAttribute("student", student);
+
+        request.getRequestDispatcher("teacherAction/editStudentStatus.jsp").forward(request, response);
     }
 
     private void listStudents (HttpServletRequest request, HttpServletResponse response)
@@ -74,5 +80,37 @@ public class TeacherActionController extends HttpServlet {
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("teacherAction/listStudent.jsp");
         dispatcher.forward(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String action = request.getParameter("action");
+        if (action == null) action = "";
+
+        try {
+            switch (action) {
+                case "edit":
+                    editStudentStatus(request, response);
+                    break;
+                default:
+                    listStudents(request, response);
+                    break;
+            }
+        } catch (SQLException e) {
+            throw new ServletException(e);
+        }
+    }
+
+    // Lỗi chữ tiếng việt có dấu =((((((((((((((((
+    private void editStudentStatus(HttpServletRequest request, HttpServletResponse response)
+        throws SQLException, IOException, ServletException {
+        int studentId = Integer.parseInt(request.getParameter("studentId"));
+        System.out.println(request.getParameter("status"));
+        StudentStatus status = StudentStatus.fromString(request.getParameter("status"));
+
+        studentDAO.updateStudentStatus(studentId, status);
+        request.getRequestDispatcher("teacherAction/listStudent.jsp");
+        listStudents(request, response);
     }
 }

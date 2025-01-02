@@ -14,10 +14,8 @@ public class StudentDAO implements IStudentDAO {
             "(FullName,Email,PhoneNumber," +
             "Status,DateOfBirth,Address,ClassId) " +
             "VALUES(?,?,?,?,?,?,?)";
-    private final String UPDATE_STUDENT = "UPDATE students SET " +
-            "FullName = ?,Email = ?,PhoneNumber = ?," +
-            "Status = ?,DateOfBirth = ?,Address = ?," +
-            "ClassId = ? WHERE StudentId = ?;";
+    private final String UPDATE_STUDENT_STATUS = "UPDATE students SET " +
+            "Status = ? WHERE StudentId = ?;";
     private final String DELETE_STUDENT = "DELETE FROM students WHERE StudentId = ?;";
     private final String SELECT_STUDENT_BY_ID = "SELECT * FROM students WHERE StudentId = ?";
     private final String SELECT_STUDENTS_BY_CLASS_ID = "SELECT * FROM students WHERE ClassId = ?";
@@ -71,13 +69,34 @@ public class StudentDAO implements IStudentDAO {
 
     @Override
     public Student selectStudent(int id) {
-        return null;
+        Student student = null;
+
+        try (Connection connection = Database.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_STUDENT_BY_ID);) {
+            preparedStatement.setInt(1, id);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                int studentId = rs.getInt("StudentId");
+                String fullName = rs.getString("FullName");
+                String email = rs.getString("Email");
+                String phoneNumber = rs.getString("PhoneNumber");
+                StudentStatus status = StudentStatus.fromString(rs.getString("Status"));
+                LocalDate dateOfBirth = rs.getDate("DateOfBirth").toLocalDate();
+                String address = rs.getString("Address");
+                int classId = rs.getInt("ClassId");
+                student = new Student(studentId,fullName,email,phoneNumber,status,dateOfBirth,address,classId);
+            }
+        } catch (SQLException e) {
+            Database.printSQLException(e);
+        }
+        return student;
     }
 
     @Override
     public List<Student> selectStudentsByClass(int id) {
         List<Student> students = new ArrayList<>();
-        try(Connection connection = Database.getConnection();
+        try (Connection connection = Database.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_STUDENTS_BY_CLASS_ID);) {
             preparedStatement.setInt(1, id);
             ResultSet rs = preparedStatement.executeQuery();
@@ -98,5 +117,17 @@ public class StudentDAO implements IStudentDAO {
             Database.printSQLException(e);
         }
         return students;
+    }
+
+    public void updateStudentStatus(int studentId, StudentStatus status) {
+        try (Connection connection = Database.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_STUDENT_STATUS);) {
+            preparedStatement.setString(1, status.toString());
+            preparedStatement.setInt(2, studentId);
+            System.out.println(preparedStatement.toString());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            Database.printSQLException(e);
+        }
     }
 }

@@ -66,7 +66,6 @@
                 </div>
             </caption>
             <tr>
-                <th>ID</th>
                 <th>Name</th>
                 <th>Email</th>
                 <th>Phone number</th>
@@ -76,8 +75,9 @@
             </tr>
             <c:forEach var="student" items="${studentList}">
                 <tr>
-                    <td><c:out value="${student.getStudentId()}"/></td>
-                    <td><c:out value="${student.getFullName()}"/></td>
+                    <td><a href="/teacher?action=edit&studentId=${student.getStudentId()}">
+                        <c:out value="${student.getFullName()}"/>
+                    </a></td>
                     <td><c:out value="${student.getEmail()}"/></td>
                     <td><c:out value="${student.getPhoneNumber()}"/></td>
                     <td><c:out value="${student.getStatus().toString()}"/></td>

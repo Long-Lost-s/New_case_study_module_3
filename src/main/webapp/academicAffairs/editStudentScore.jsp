@@ -29,7 +29,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <input type="submit"/>
+                        <input type="submit" value="submit"/>
                     </td>
                 </tr>
             </table>
