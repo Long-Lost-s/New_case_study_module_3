@@ -18,25 +18,18 @@ public class StudentController extends HttpServlet {
         String classIdParam = request.getParameter("classId");
 
         if (classIdParam == null || classIdParam.isEmpty()) {
-            System.out.println("classId is missing or invalid.");
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing or invalid classId parameter");
             return;
         }
 
         try {
             int classId = Integer.parseInt(classIdParam);
-            System.out.println("classId received: " + classId);
-
             StudentDAO studentDAO = new StudentDAO();
             List<Student> students = studentDAO.getStudentsByClassId(classId);
-
-            System.out.println("Students retrieved for classId " + classId + ": " + students.size());
-
             request.setAttribute("students", students);
             request.setAttribute("totalStudents", students.size());
             request.getRequestDispatcher("view/students.jsp").forward(request, response);
         } catch (NumberFormatException e) {
-            System.out.println("Invalid classId format: " + classIdParam);
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid classId format");
         }
     }
