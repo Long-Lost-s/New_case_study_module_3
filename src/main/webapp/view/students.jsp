@@ -2,6 +2,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <h2>Danh sách học viên</h2>
+<a href="classes">Back to Classes</a>
+
 <c:if test="${empty students}">
     <p>Không có học viên nào thuộc lớp này.</p>
 </c:if>
