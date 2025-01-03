@@ -11,13 +11,13 @@
 <body>
 <h2>Danh sách lớp học</h2>
 
-<table border="1">
+<table class="class-table">
     <thead>
     <tr>
         <th>Class ID</th>
         <th>Class Name</th>
         <th>Teacher ID</th>
-        <th>Actions</th>
+        <th>Details</th>
     </tr>
     </thead>
     <tbody>
@@ -27,7 +27,7 @@
             <td>${schoolClass.className}</td>
             <td>${schoolClass.teacherId}</td>
             <td>
-            <td><a href="students?classId=${schoolClass.classId}">View Students</a></td>
+                <a href="students?classId=${schoolClass.classId}" class="btn-action">View Students</a>
             </td>
         </tr>
     </c:forEach>
